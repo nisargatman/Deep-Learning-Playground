@@ -1,0 +1,92 @@
+nnet = {
+  "layers": [
+    {
+      "type": "input",
+      "shape": [26, 26, 3]
+    },
+    {
+      "type": "conv",
+      "filter_size": [5, 5],
+      "depth": 32,
+      "stride": [1, 1, 1, 1],
+      "padding": "SAME",
+      "weight_initializer": {
+        "type": "truncated_normal",
+        "std_dev": 0.1
+      },
+      "bias_initializer": {
+        "type": "constant",
+        "value": 0
+      }
+    },
+    {
+      "type": "activation",
+      "activation_type": "relu"
+    },
+    {
+      "type": "pool",
+      "pool_type": "max",
+      "window_size": [1, 2, 2, 1],
+      "strides": [1, 1, 1, 1],
+      "padding": "SAME"
+    },
+    {
+      "type": "conv",
+      "filter_size": [5, 5],
+      "depth": 64,
+      "stride": [1, 1, 1, 1],
+      "padding": "SAME",
+      "weight_initializer": {
+        "type": "truncated_normal",
+        "std_dev": 0.1
+      },
+      "bias_initializer": {
+        "type": "constant",
+        "value": 0.1
+      }
+    },
+    {
+      "type": "activation",
+      "activation_type": "relu"
+    },
+    {
+      "type": "pool",
+      "pool_type": "max",
+      "window_size": [1, 2, 2, 1],
+      "strides": [1, 1, 1, 1],
+      "padding": "SAME"
+    },
+    {
+      "type": "fully_connected",
+      "outtput_size": 512,
+      "weight_initializer": {
+        "type": "truncated_normal",
+        "std_dev": 0.1
+      },
+      "bias_initializer": {
+        "type": "constant",
+        "value": 0.1
+      }
+    },
+    {
+      "type": "activation",
+      "activation_type": "relu"
+    },
+    {
+      "type": "fully_connected",
+      "outtput_size": 10,
+      "weight_initializer": {
+        "type": "truncated_normal",
+        "std_dev": 0.1
+      },
+      "bias_initializer": {
+        "type": "constant",
+        "value": 0.1
+      }
+    },
+    {
+      "type": "classification",
+      "subtype": "softmax"
+    }
+  ]
+}
