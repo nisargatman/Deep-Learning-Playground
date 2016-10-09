@@ -58,7 +58,7 @@ nnet = {
     },
     {
       "type": "fully_connected",
-      "outtput_size": 512,
+      "output_size": 512,
       "weight_initializer": {
         "type": "truncated_normal",
         "std_dev": 0.1

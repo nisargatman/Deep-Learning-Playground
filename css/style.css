@@ -1,0 +1,57 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #fff;
+}
+
+div.layer-editor-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+div.layer-editor {
+  border: 1px solid black;
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  margin: 30px 0;
+  background: #fff;
+}
+
+div.layer-editor-header {
+  background: #666a86;
+  padding: 6px 10px;
+  color: #fff;
+  border-bottom: 1px solid black;
+}
+
+div.layer-editor-content {
+  padding: 10px 10px;
+}
+
+div.layer-editor a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.button {
+    background-color: #fff;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-right: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.x {
+  padding-left: 20px;
+}
+
+.u-pad-right {
+  float: right;
+}
+
+.u-uppercase {
+  text-transform: uppercase;
+}
