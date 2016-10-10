@@ -9,6 +9,22 @@ var LayerEditorHeader = React.createClass({
     }
 });
 
+var FormLabel = React.createClass({
+    render: function() {
+        return (
+            <div className="form-label" style={{width: (this.props.width || 100) + "px"}}>{this.props.children}</div>
+        );
+    }
+});
+
+var Form = React.createClass({
+    render: function() {
+        return (
+            <input type={this.props.type} defaultValue={this.props.defaultValue || 0} className="form" style={{width: this.props.width || 100 + "px"}} />
+        );
+    }
+});
+
 var LayerEditor = React.createClass({
     getInitialState: function() {
         return {
@@ -20,8 +36,10 @@ var LayerEditor = React.createClass({
             <div className="layer-editor">
                 <LayerEditorHeader deleter={this.props.deleter.bind(null, this.props.index)} title="Input layer" />
                 <div className="layer-editor-content">
-                    Input size: <input type="number" defaultValue={10} /> × <input type="number" defaultValue={10} /><br />
-                    Channels: <input type="number" defaultValue={3} />
+                    <FormLabel width={80}>Input size:</FormLabel>
+                    <Form type="number" defaultValue={10} width={60}/> × <Form type="number" defaultValue={10} width={60}/> <br />
+                    <FormLabel width={80}>Channels:</FormLabel>
+                    <Form type="number" defaultValue={3} width={60} />
                 </div>
             </div>
         );
@@ -32,10 +50,13 @@ var LayerEditor = React.createClass({
             <div className="layer-editor">
                 <LayerEditorHeader deleter={this.props.deleter.bind(null, this.props.index)} title="Convolutional layer" />
                 <div className="layer-editor-content">
-                    Filter size: <input type="number" defaultValue={5} /> × <input type="number" defaultValue={5} />  <br />
-                    Depth: <input type="number" defaultValue={32} /> <br />
-                    Stride: <input type="number" defaultValue={1} /> <input type="number" defaultValue={1} /> <input type="number" defaultValue={1} /> <input type="number" defaultValue={1} /> <br />
-                    Padding:
+                    <FormLabel width={80}>Filter size:</FormLabel>
+                    <Form type="number" defaultValue={5} width={60}/> × <Form type="number" defaultValue={5} width={60}/> <br />
+                    <FormLabel width={80}>Depth:</FormLabel>
+                    <Form type="number" defaultValue={32} width={60}/> <br />
+                    <FormLabel width={80}>Stride:</FormLabel>
+                    <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <br />
+                    <FormLabel width={80}>Padding:</FormLabel>
                     <select name="padding" defaultValue="same">
                       <option value="same">Same</option>
                       <option value="valid">Valid</option>
@@ -49,7 +70,8 @@ var LayerEditor = React.createClass({
             <div className="layer-editor">
                 <LayerEditorHeader deleter={this.props.deleter.bind(null, this.props.index)} title="Fully-connected layer" />
                 <div className="layer-editor-content">
-                    Output size: <input type="number" defaultValue={10} /> × <input type="number" defaultValue={10} />  <br />
+                    <FormLabel width={95}>Output size:</FormLabel>
+                    <Form type="number" defaultValue={10} width={60}/> × <Form type="number" defaultValue={10} width={60}/>  <br />
                 </div>
             </div>
         );

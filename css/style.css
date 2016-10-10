@@ -37,6 +37,7 @@ div.layer-editor-header {
 
 div.layer-editor-content {
   padding: 10px 10px;
+  line-height: 1.7em;
 }
 
 div.layer-editor a {
@@ -62,6 +63,26 @@ div.layer-editor a {
 
 .x {
   padding-left: 20px;
+}
+
+.form-label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+input.form {
+  padding: 3px 5px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin: 2px 5px;
+}
+
+input.form:focus {
+    border: 1px solid #000;
 }
 
 .u-pad-right {
