@@ -25,6 +25,20 @@ var Form = React.createClass({
     }
 });
 
+var Select = React.createClass({
+    render: function() {
+        return (
+            <select name={this.props.name} defaultValue={this.props.defaultValue} className="select" style={{width: (this.props.width || 100) + "px"}}>
+                {
+                    this.props.values.map(function(d, i) {
+                        return <option value={d.raw} key={i}>{d.display}</option>;
+                    }, this)
+                }
+            </select>
+        );
+    }
+});
+
 var LayerEditor = React.createClass({
     getInitialState: function() {
         return {
@@ -57,10 +71,7 @@ var LayerEditor = React.createClass({
                     <FormLabel width={80}>Stride:</FormLabel>
                     <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <br />
                     <FormLabel width={80}>Padding:</FormLabel>
-                    <select name="padding" defaultValue="same">
-                      <option value="same">Same</option>
-                      <option value="valid">Valid</option>
-                    </select>
+                    <Select name="padding" width={90} defaultValue="same" values={[{raw: "same", display: "Same"}, {raw: "valid", display: "Valid"}]} />
                 </div>
             </div>
         );
@@ -76,6 +87,23 @@ var LayerEditor = React.createClass({
             </div>
         );
     },
+    renderPool: function() {
+        return (
+            <div className="layer-editor">
+                <LayerEditorHeader deleter={this.props.deleter.bind(null, this.props.index)} title="Pooling layer" />
+                <div className="layer-editor-content">
+                    <FormLabel width={100}>Pooling type</FormLabel>
+                    <Select name="pooling" width={90} defaultValue="max" values={[{raw: "max", display: "Max"}, {raw: "average", display: "Average"}]} /> <br />
+                    <FormLabel width={100}>Window size</FormLabel>
+                    <Form type="number" defaultValue={2} width={60} /> × <Form type="number" defaultValue={2} width={60} /> <br />
+                    <FormLabel width={100}>Stride:</FormLabel>
+                    <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <Form type="number" defaultValue={1} width={60}/> <br />
+                    <FormLabel width={100}>Padding:</FormLabel>
+                    <Select name="padding" width={90} defaultValue="same" values={[{raw: "same", display: "Same"}, {raw: "valid", display: "Valid"}]} />
+                </div>
+            </div>
+        );
+    },
     render: function() {
         if (this.props.type == "input")
             return this.renderInput();
@@ -83,6 +111,8 @@ var LayerEditor = React.createClass({
             return this.renderConv();
         else if (this.props.type == "full")
             return this.renderFull();
+        else if (this.props.type == "pool")
+            return this.renderPool();
         else
             throw "Invalid layer type" + this.props.type;
     }
@@ -90,7 +120,7 @@ var LayerEditor = React.createClass({
 
 var LayerManager = React.createClass({
     getInitialState: function() {
-        return {layers: ["input", "conv", "full"]}
+        return {layers: ["input", "conv", "pool", "full"]}
     },
     addLayerEditor: function(type) {
         var layers = this.state.layers;
@@ -113,6 +143,7 @@ var LayerManager = React.createClass({
             <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "input")}>Add input layer</button>
             <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "conv")}>Add convolutional layer</button>
             <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "full")}>Add fully-connected layer</button>
+            <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "pool")}>Add pooling layer</button>
             </div>
         );
     }
