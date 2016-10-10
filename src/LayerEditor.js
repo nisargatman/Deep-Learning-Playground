@@ -136,8 +136,12 @@ var LayerManager = React.createClass({
         return (
             <div>
             {this.state.layers.map(function(d, i) {
+                var chevron = (i !== this.state.layers.length-1) ? <div className="chevron">⌄</div> : null;
                 return (
-                    <LayerEditor type={d} key={i} index={i} deleter={this.removeLayerEditor}></LayerEditor>
+                    <div key={i}>
+                        <LayerEditor type={d} key={i} index={i} deleter={this.removeLayerEditor}></LayerEditor>
+                        {chevron}
+                    </div>
                 );
             }, this)}
             <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "input")}>Add input layer</button>
