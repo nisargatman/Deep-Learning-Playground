@@ -100,5 +100,5 @@ ReactDOM.render(
     <div className="layer-editor-container">
         <LayerManager />
     </div>,
-    document.getElementById('example')
+    document.getElementById('content')
 );
