@@ -104,6 +104,28 @@ var LayerEditor = React.createClass({
             </div>
         );
     },
+    renderActivation: function() {
+        return (
+            <div className="layer-editor">
+                <LayerEditorHeader deleter={this.props.deleter.bind(null, this.props.index)} title="Activation layer" />
+                <div className="layer-editor-content">
+                    <FormLabel width={150}>Activation {"function"}:</FormLabel>
+                    <Select name="activation" width={100} defaultValue="sigmoid" values={[{raw: "sigmoid", display: "Sigmoid"}, {raw: "relu", display: "ReLU"}, {raw: "tanh", display: "tanh"}]} />
+                </div>
+            </div>
+        );
+    },
+    renderClassification: function() {
+        return (
+            <div className="layer-editor">
+                <LayerEditorHeader deleter={this.props.deleter.bind(null, this.props.index)} title="Classification layer" />
+                <div className="layer-editor-content">
+                    <FormLabel width={170}>Classification {"function"}:</FormLabel>
+                    <Select name="activation" width={100} defaultValue="sigmoid" values={[{raw: "softmax", display: "Softmax"}]} />
+                </div>
+            </div>
+        );
+    },
     render: function() {
         if (this.props.type == "input")
             return this.renderInput();
@@ -113,6 +135,10 @@ var LayerEditor = React.createClass({
             return this.renderFull();
         else if (this.props.type == "pool")
             return this.renderPool();
+        else if (this.props.type == "activation")
+            return this.renderActivation();
+        else if (this.props.type == "classification")
+            return this.renderClassification();
         else
             throw "Invalid layer type" + this.props.type;
     }
@@ -120,7 +146,7 @@ var LayerEditor = React.createClass({
 
 var LayerManager = React.createClass({
     getInitialState: function() {
-        return {layers: ["input", "conv", "pool", "full"]}
+        return {layers: ["input", "conv", "activation", "pool", "full", "activation", "classification"]}
     },
     addLayerEditor: function(type) {
         var layers = this.state.layers;
@@ -148,6 +174,8 @@ var LayerManager = React.createClass({
             <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "conv")}>Add convolutional layer</button>
             <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "full")}>Add fully-connected layer</button>
             <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "pool")}>Add pooling layer</button>
+            <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "activation")}>Add activation layer</button>
+            <button type="button" className="button" onClick={this.addLayerEditor.bind(null, "classification")}>Add classification layer</button>
             </div>
         );
     }
