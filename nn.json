@@ -26,8 +26,8 @@ nnet = {
     {
       "type": "pool",
       "pool_type": "max",
-      "window_size": [1, 2, 2, 1],
-      "strides": [1, 1, 1, 1],
+      "window_size": [2, 2],
+      "stride": [1, 1, 1, 1],
       "padding": "SAME"
     },
     {
@@ -52,8 +52,8 @@ nnet = {
     {
       "type": "pool",
       "pool_type": "max",
-      "window_size": [1, 2, 2, 1],
-      "strides": [1, 1, 1, 1],
+      "window_size": [2, 2],
+      "stride": [1, 1, 1, 1],
       "padding": "SAME"
     },
     {
@@ -86,7 +86,7 @@ nnet = {
     },
     {
       "type": "classification",
-      "subtype": "softmax"
+      "classification_type": "softmax"
     }
   ]
 }
