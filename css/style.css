@@ -114,7 +114,7 @@ div.layer-editor a {
 }
 
 input.form {
-  padding: 3px 5px;
+  padding: 3px 0 3px 5px;
   box-sizing: border-box;
   border-radius: 3px;
   border: 1px solid #ccc;
